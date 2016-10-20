@@ -9,7 +9,7 @@
     /// </summary>
     public class FeatureToggleRouteHandler : IRouteHandler
     {
-        private readonly Func<RequestContext, bool> _ftFuncer;
+        private readonly Func<RequestContext, bool> _ftFuncter;
         private readonly IRouteHandler _actualVersionRouteHandler;
         private readonly IRouteHandler _nextVersionRouteHandler;
 
@@ -17,8 +17,8 @@
         /// Initializes a new instance of the <see cref="FeatureToggleRouteHandler"/> class.
         /// </summary>
         /// <param name="ftFuncter">The feature toggle functer.</param>
-        /// <param name="actualVersionHandler"></param>
-        /// <param name="nextVersionHandler"></param>
+        /// <param name="actualVersionHandler">The actual version route handler.</param>
+        /// <param name="nextVersionHandler">The next version route handler.</param>
         public FeatureToggleRouteHandler(Func<RequestContext, bool> ftFuncter, IRouteHandler actualVersionHandler, IRouteHandler nextVersionHandler)
         {
             if (ftFuncter == null)
@@ -33,7 +33,7 @@
             {
                 throw new ArgumentNullException("nextVersionHandler");
             }
-            _ftFuncer = ftFuncter;
+            _ftFuncter = ftFuncter;
             _actualVersionRouteHandler = actualVersionHandler;
             _nextVersionRouteHandler = nextVersionHandler;
         }
@@ -49,7 +49,7 @@
             {
                 throw new ArgumentNullException("requestContext");
             }
-            return _ftFuncer(requestContext)
+            return _ftFuncter(requestContext)
                 ? _nextVersionRouteHandler.GetHttpHandler(requestContext)
                 : _actualVersionRouteHandler.GetHttpHandler(requestContext);
         }
