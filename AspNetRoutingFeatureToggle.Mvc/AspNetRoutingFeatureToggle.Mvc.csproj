@@ -69,9 +69,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RouteCollectionExtensions.cs" />
+    <Compile Include="FeatureToggleRouteBuilderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RouteExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AspNetRoutingFeatureToggle\AspNetRoutingFeatureToggle.csproj">
