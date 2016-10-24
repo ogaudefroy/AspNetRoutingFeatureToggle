@@ -1,6 +1,7 @@
 ﻿namespace AspNetRoutingFeatureToggle
 {
     using System;
+    using System.Web.Mvc;
     using System.Web.Routing;
 
     public class FeatureToggleRouteBuilder
@@ -10,6 +11,8 @@
         private RouteValueDictionary _defaults;
         private RouteValueDictionary _constraints;
         private RouteValueDictionary _dataTokens;
+        private IRouteHandler _currentRouteHandler;
+        private IRouteHandler _experimentRouteHandler;
         
         /// <summary>
         /// Initializes a new instance of the <see cref="FeatureToggleRouteBuilder"/> class.
@@ -23,10 +26,6 @@
             }
             _url = url;
         }
-
-        public IRouteHandler CurrentRouteHandler { get; set; }
-
-        public IRouteHandler ExperimentRouteHandler { get; set; }
         
         public static FeatureToggleRouteBuilder WithUrl(string url)
         {
@@ -64,24 +63,30 @@
 
         public FeatureToggleRouteBuilder WithCurrentPageRoute(string physicalFile, bool checkFileAccess)
         {
-            this.CurrentRouteHandler = new PageRouteHandler(physicalFile, checkFileAccess);
+            _currentRouteHandler = new PageRouteHandler(physicalFile, checkFileAccess);
             return this;
         }
 
-        public FeatureToggleRouteBuilder WithExperimentPageRoute(string physicalFile)
+        public FeatureToggleRouteBuilder WithExperimentalPageRoute(string physicalFile)
         {
-            return WithExperimentPageRoute(physicalFile, true);
+            return WithExperimentalPageRoute(physicalFile, true);
         }
 
-        public FeatureToggleRouteBuilder WithExperimentPageRoute(string physicalFile, bool checkFileAccess)
+        public FeatureToggleRouteBuilder WithExperimentalPageRoute(string physicalFile, bool checkFileAccess)
         {
-            this.CurrentRouteHandler = new PageRouteHandler(physicalFile, checkFileAccess);
+            _currentRouteHandler = new PageRouteHandler(physicalFile, checkFileAccess);
             return this;
         }
 
+        public FeatureToggleRouteBuilder WithExperimentalMvcRoute()
+        {
+            _experimentRouteHandler = new MvcRouteHandler();
+            return this;
+        }
+        
         public Route Build()
         {
-            var handler = new FeatureToggleRouteHandler(_ftFuncter, this.CurrentRouteHandler, this.ExperimentRouteHandler);
+            var handler = new FeatureToggleRouteHandler(_ftFuncter, _currentRouteHandler, _experimentRouteHandler);
             return new Route(_url, _defaults, _constraints, _dataTokens, handler);
         }
     }

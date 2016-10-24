@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetRoutingFeatureToggle", "AspNetRoutingFeatureToggle\AspNetRoutingFeatureToggle.csproj", "{7ED90F76-FB67-4715-B491-C32F332F437E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetRoutingFeatureToggle.Sample", "AspNetRoutingFeatureToggle.Sample\AspNetRoutingFeatureToggle.Sample.csproj", "{2915CD7E-2C41-4BCA-80ED-98E3A420A33C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetRoutingFeatureToggle.Mvc", "AspNetRoutingFeatureToggle.Mvc\AspNetRoutingFeatureToggle.Mvc.csproj", "{22FA590B-96AF-4885-A86D-70E2E9211557}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{2915CD7E-2C41-4BCA-80ED-98E3A420A33C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2915CD7E-2C41-4BCA-80ED-98E3A420A33C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2915CD7E-2C41-4BCA-80ED-98E3A420A33C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22FA590B-96AF-4885-A86D-70E2E9211557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22FA590B-96AF-4885-A86D-70E2E9211557}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22FA590B-96AF-4885-A86D-70E2E9211557}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22FA590B-96AF-4885-A86D-70E2E9211557}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -101,10 +101,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AspNetRoutingFeatureToggle.Mvc\AspNetRoutingFeatureToggle.Mvc.csproj">
-      <Project>{22fa590b-96af-4885-a86d-70e2e9211557}</Project>
-      <Name>AspNetRoutingFeatureToggle.Mvc</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AspNetRoutingFeatureToggle\AspNetRoutingFeatureToggle.csproj">
       <Project>{7ed90f76-fb67-4715-b491-c32f332f437e}</Project>
       <Name>AspNetRoutingFeatureToggle</Name>
