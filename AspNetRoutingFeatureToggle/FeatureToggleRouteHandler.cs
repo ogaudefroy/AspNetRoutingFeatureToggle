@@ -10,32 +10,32 @@
     public class FeatureToggleRouteHandler : IRouteHandler
     {
         private readonly Func<RequestContext, bool> _ftFuncter;
-        private readonly IRouteHandler _actualVersionRouteHandler;
-        private readonly IRouteHandler _nextVersionRouteHandler;
+        private readonly IRouteHandler _currentRouteHandler;
+        private readonly IRouteHandler _experimentalRouteHandler;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FeatureToggleRouteHandler"/> class.
         /// </summary>
         /// <param name="ftFuncter">The feature toggle functer.</param>
-        /// <param name="actualVersionHandler">The actual version route handler.</param>
-        /// <param name="nextVersionHandler">The next version route handler.</param>
-        public FeatureToggleRouteHandler(Func<RequestContext, bool> ftFuncter, IRouteHandler actualVersionHandler, IRouteHandler nextVersionHandler)
+        /// <param name="currentHandler">The actual version route handler.</param>
+        /// <param name="experimentalHandler">The next version route handler.</param>
+        public FeatureToggleRouteHandler(Func<RequestContext, bool> ftFuncter, IRouteHandler currentHandler, IRouteHandler experimentalHandler)
         {
             if (ftFuncter == null)
             {
                 throw new ArgumentNullException("ftFuncter");
             }
-            if (actualVersionHandler == null)
+            if (currentHandler == null)
             {
-                throw new ArgumentNullException("actualVersionHandler");
+                throw new ArgumentNullException("currentHandler");
             }
-            if (nextVersionHandler == null)
+            if (experimentalHandler == null)
             {
-                throw new ArgumentNullException("nextVersionHandler");
+                throw new ArgumentNullException("experimentalHandler");
             }
             _ftFuncter = ftFuncter;
-            _actualVersionRouteHandler = actualVersionHandler;
-            _nextVersionRouteHandler = nextVersionHandler;
+            _currentRouteHandler = currentHandler;
+            _experimentalRouteHandler = experimentalHandler;
         }
 
         /// <summary>
@@ -50,8 +50,8 @@
                 throw new ArgumentNullException("requestContext");
             }
             return _ftFuncter(requestContext)
-                ? _nextVersionRouteHandler.GetHttpHandler(requestContext)
-                : _actualVersionRouteHandler.GetHttpHandler(requestContext);
+                ? _experimentalRouteHandler.GetHttpHandler(requestContext)
+                : _currentRouteHandler.GetHttpHandler(requestContext);
         }
     }
 }
