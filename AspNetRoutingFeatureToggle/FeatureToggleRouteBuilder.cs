@@ -5,7 +5,7 @@
     using System.Web.Routing;
 
     /// <summary>
-    /// Builder user to create feature toggled routes.
+    /// Builder used to create feature toggled routes.
     /// </summary>
     public class FeatureToggleRouteBuilder
     {
