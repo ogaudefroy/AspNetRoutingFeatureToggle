@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeatureToggleRoute.cs" />
     <Compile Include="FeatureToggleRouteBuilder.cs" />
     <Compile Include="FeatureToggleRouteHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

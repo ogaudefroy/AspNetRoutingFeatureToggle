@@ -15,13 +15,18 @@
             RouteTable.Routes.Add(webFormsToWebFormsRoute);
 
             var webFormsToMvcRoute = FeatureToggleRouteBuilder.WithUrl("offers/offer-{title}_{id}")
-                .WithConstraints(new RouteValueDictionary() { { "id", @"\d+" } })
-                .WithDefaults(new RouteValueDictionary() { { "culture", "en-US" }, { "controller", "Offers" }, { "action", "Details" } })
                 .WithFeatureToogle((r) => r.HttpContext.Request.IsSecureConnection)
-                .WithCurrentPageRoute("~/Pages/Offers/Details.aspx")
-                .WithExperimentalMvcRoute()
+                .WithCurrentPageRoute("~/Pages/Offers/Details.aspx", true, null, new RouteValueDictionary() { { "id", @"\d+" } })
+                .WithExperimentalMvcRoute(new RouteValueDictionary() { { "controller", "Offers" }, { "action", "Details" } }, new RouteValueDictionary() { { "id", @"\d+" } })
                 .Build();
             RouteTable.Routes.Add("OfferDetails", webFormsToMvcRoute);
+
+            var mvcToMvcRoute = FeatureToggleRouteBuilder.WithUrl("job/job-list")
+                .WithFeatureToogle((r) => r.HttpContext.Request.IsSecureConnection)
+                .WithCurrentMvcRoute(new RouteValueDictionary() { { "controller", "Offers" }, { "action", "List" } })
+                .WithExperimentalMvcRoute(new RouteValueDictionary() { { "controller", "OffersV2" }, { "action", "List" } })
+                .Build();
+            RouteTable.Routes.Add("OfferList", mvcToMvcRoute);
         }
     }
 }
