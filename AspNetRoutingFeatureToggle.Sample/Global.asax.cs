@@ -16,15 +16,17 @@
 
             var webFormsToMvcRoute = FeatureToggleRouteBuilder.WithUrl("offers/offer-{title}_{id}")
                 .WithFeatureToogle((r) => r.HttpContext.Request.IsSecureConnection)
-                .WithCurrentPageRoute("~/Pages/Offers/Details.aspx", true, null, new RouteValueDictionary() { { "id", @"\d+" } })
-                .WithExperimentalMvcRoute(new RouteValueDictionary() { { "controller", "Offers" }, { "action", "Details" } }, new RouteValueDictionary() { { "id", @"\d+" } })
+                .WithCurrentPageRoute("~/Pages/Offers/Details.aspx", true, null, new { id = @"\d+" })
+                .WithExperimentalMvcRoute(
+                    defaults: new { controller = "Offers" , action = "Details" }, 
+                    constraints: new { id = @"\d+" })
                 .Build();
             RouteTable.Routes.Add("OfferDetails", webFormsToMvcRoute);
 
             var mvcToMvcRoute = FeatureToggleRouteBuilder.WithUrl("job/job-list")
                 .WithFeatureToogle((r) => r.HttpContext.Request.IsSecureConnection)
-                .WithCurrentMvcRoute(new RouteValueDictionary() { { "controller", "Offers" }, { "action", "List" } })
-                .WithExperimentalMvcRoute(new RouteValueDictionary() { { "controller", "OffersV2" }, { "action", "List" } })
+                .WithCurrentMvcRoute(new { controller = "Offers", action = "List" })
+                .WithExperimentalMvcRoute(new { controller = "OffersV2", action = "List" })
                 .Build();
             RouteTable.Routes.Add("OfferList", mvcToMvcRoute);
         }
