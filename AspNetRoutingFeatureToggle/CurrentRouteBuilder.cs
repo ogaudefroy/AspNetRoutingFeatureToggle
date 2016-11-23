@@ -90,7 +90,7 @@
         /// <returns>The FT route builder itself.</returns>
         public ExperimentalRouteBuilder WithCurrentMvcRoute(RouteValueDictionary defaults)
         {
-            return WithCurrentPageRoute(defaults, null, null);
+            return WithCurrentMvcRoute(defaults, null, null);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@
         /// <returns>The FT route builder itself.</returns>
         public ExperimentalRouteBuilder WithCurrentMvcRoute(RouteValueDictionary defaults, RouteValueDictionary constraints)
         {
-            return WithCurrentPageRoute(defaults, constraints, null);
+            return WithCurrentMvcRoute(defaults, constraints, null);
         }
 
         /// <summary>
@@ -111,7 +111,7 @@
         /// <param name="constraints">A regular expression that specifies valid values for a URL parameter.</param>
         /// <param name="dataTokens">The route data tokens.</param>
         /// <returns>The FT route builder itself.</returns>
-        public ExperimentalRouteBuilder WithCurrentPageRoute(RouteValueDictionary defaults, RouteValueDictionary constraints, RouteValueDictionary dataTokens)
+        public ExperimentalRouteBuilder WithCurrentMvcRoute(RouteValueDictionary defaults, RouteValueDictionary constraints, RouteValueDictionary dataTokens)
         {
             _builder.Current.RouteHandler = new MvcRouteHandler();
             _builder.Current.Defaults = defaults;
