@@ -69,10 +69,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CurrentRouteBuilder.cs" />
+    <Compile Include="ExperimentalRouteBuilder.cs" />
+    <Compile Include="FeatureToggleBuilder.cs" />
     <Compile Include="FeatureToggleRoute.cs" />
     <Compile Include="FeatureToggleRouteBuilder.cs" />
     <Compile Include="FeatureToggleRouteHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteProperties.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
