@@ -1,6 +1,24 @@
 # AspNetRoutingFeatureToggle
-A feature toggle library with ASP.Net routing attempting to solve A/B testing with constant URLs.
 
+AspNetRoutingFeatureToggle is a feature toggle library based on ASP.Net routing attempting to solve A/B testing with constant URLs.
+
+## Use Case
+Currently migrating a legacy ASP.Net application ?
+You want to implement A/B testing ?
+Maintaining public facing URLs is an explicit requirement ?
+Your URLs are already managed by ASP.Net routing ?
+
+If all of the above are true, then you might be interested by this library to succeed your migration path.
+
+Here is how it works: 
+    - Feature toggle is based on a predicate with the [RequestContext](https://msdn.microsoft.com/en-us/library/system.web.routing.requestcontext%28v=vs.110%29.aspx)
+    - If the toggle returns true then ExperimentalRoute is executed
+    - Otherwise CurrentRoute is executed
+
+Current implementation supports WebForms and MVC [IRouteHandler](https://msdn.microsoft.com/fr-fr/library/system.web.routing.iroutehandler(v=vs.110).aspx) implementations ; works with anonymous and named routes.
+A fluent builder helps you configure seamlessly your routes.
+
+## Examples
 ### WebForms to WebForms
 
     var route = FeatureToggleRouteBuilder.WithUrl("homepage")
@@ -13,8 +31,12 @@ A feature toggle library with ASP.Net routing attempting to solve A/B testing wi
 
     var route = FeatureToggleRouteBuilder.WithUrl("offers/offer-{title}_{id}")
                 .WithFeatureToogle((r) => r.HttpContext.Request.IsSecureConnection)
-                .WithCurrentPageRoute("~/Pages/Offers/Details.aspx", true, null, new { id = @"\d+" })
-                .WithExperimentalMvcRoute(new { controller = "Offers", action = "Details" }, new { id = @"\d+" })
+                .WithCurrentPageRoute("~/Pages/Offers/Details.aspx", true, 
+                    defaults: null, 
+                    constraints: new { id = @"\d+" })
+                .WithExperimentalMvcRoute(
+                    defaults: new { controller = "Offers", action = "Details" }, 
+                    constraints: new { id = @"\d+" })
                 .Build();
 
 ### MVC to MVC
@@ -29,6 +51,10 @@ A feature toggle library with ASP.Net routing attempting to solve A/B testing wi
 
     var route = FeatureToggleRouteBuilder.WithUrl("offers/offer-{title}_{id}")
                 .WithFeatureToogle((r) => r.HttpContext.Request.IsSecureConnection)
-                .WithCurrentMvcRoute(new { controller = "Offers", action = "Details" }, new { id = @"\d+" })
-                .WithExperimentalPageRoute("~/Pages/Offers/Details.aspx", true, null, new { id = @"\d+" })                
+                .WithCurrentMvcRoute(
+                    defaults: new { controller = "Offers", action = "Details" },
+                    constraints: new { id = @"\d+" })
+                .WithExperimentalPageRoute("~/Pages/Offers/Details.aspx", true,
+                    defaults: null,
+                    constraints: new { id = @"\d+" })                
                 .Build();
