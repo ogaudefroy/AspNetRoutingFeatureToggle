@@ -3,9 +3,9 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("AspNetRoutingFeatureToggle")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A feature toggle library with ASP.Net routing")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Olivier GAUDEFROY")]
 [assembly: AssemblyProduct("AspNetRoutingFeatureToggle")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
