@@ -23,12 +23,8 @@
             Func<RequestContext, bool> ftFuncter,
             RouteProperties currentRouteProperties,
             RouteProperties experimentalRouteProperties)
-            : base(url, new FeatureToggleRouteHandler(ftFuncter, currentRouteProperties.RouteHandler, experimentalRouteProperties.RouteHandler))
+            : base(url, null)
         {
-            if (ftFuncter == null)
-            {
-                throw new ArgumentNullException("ftFuncter");
-            }
             _ftFuncter = ftFuncter;
             this.CurrentRouteProperties = currentRouteProperties;
             this.ExperimentalRouteProperties = experimentalRouteProperties;
@@ -59,8 +55,32 @@
         /// <returns>An object that contains the values from the route definition.</returns>
         public override RouteData GetRouteData(HttpContextBase httpContext)
         {
-            FixRouteValues(new RequestContext(httpContext, new RouteData()));
-            return base.GetRouteData(httpContext);
+            RouteProperties actualProperties = new RouteProperties()
+            {
+                Defaults = this.Defaults,
+                Constraints = this.Constraints,
+                DataTokens = this.DataTokens,
+                RouteHandler = this.RouteHandler
+            };
+            var requestContext = new RequestContext(httpContext, new RouteData());
+
+            try
+            {
+                bool isExperimental = _ftFuncter(requestContext);
+                this.Defaults = isExperimental ? this.ExperimentalRouteProperties.Defaults : this.CurrentRouteProperties.Defaults;
+                this.Constraints = isExperimental ? this.ExperimentalRouteProperties.Constraints : this.CurrentRouteProperties.Constraints;
+                this.DataTokens = isExperimental ? this.ExperimentalRouteProperties.DataTokens : this.CurrentRouteProperties.DataTokens;
+                this.RouteHandler = isExperimental ? this.ExperimentalRouteProperties.RouteHandler : this.CurrentRouteProperties.RouteHandler;
+
+                return base.GetRouteData(httpContext);
+            }
+            finally
+            {
+                this.Defaults = actualProperties.Defaults;
+                this.Constraints = actualProperties.Constraints;
+                this.DataTokens = actualProperties.DataTokens;
+                this.RouteHandler = actualProperties.RouteHandler;
+            }
         }
 
         /// <summary>
@@ -71,16 +91,31 @@
         /// <param name="values">An object that contains the parameters for a route.</param>
         public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)
         {
-            FixRouteValues(requestContext);
-            return base.GetVirtualPath(requestContext, values);
-        }
-        
-        private void FixRouteValues(RequestContext requestContext)
-        {
-            bool isExperimental = _ftFuncter(requestContext);
-            this.Defaults = isExperimental ? this.ExperimentalRouteProperties.Defaults : this.CurrentRouteProperties.Defaults;
-            this.Constraints = isExperimental ? this.ExperimentalRouteProperties.Constraints : this.CurrentRouteProperties.Constraints;
-            this.DataTokens = isExperimental ? this.ExperimentalRouteProperties.DataTokens : this.CurrentRouteProperties.DataTokens;
+            RouteProperties actualProperties = new RouteProperties()
+            {
+                Defaults = this.Defaults,
+                Constraints = this.Constraints,
+                DataTokens = this.DataTokens,
+                RouteHandler = this.RouteHandler
+            };
+
+            try
+            {
+                bool isExperimental = _ftFuncter(requestContext);
+                this.Defaults = isExperimental ? this.ExperimentalRouteProperties.Defaults : this.CurrentRouteProperties.Defaults;
+                this.Constraints = isExperimental ? this.ExperimentalRouteProperties.Constraints : this.CurrentRouteProperties.Constraints;
+                this.DataTokens = isExperimental ? this.ExperimentalRouteProperties.DataTokens : this.CurrentRouteProperties.DataTokens;
+                this.RouteHandler = isExperimental ? this.ExperimentalRouteProperties.RouteHandler : this.CurrentRouteProperties.RouteHandler;
+
+                return base.GetVirtualPath(requestContext, values);
+            }
+            finally
+            {
+                this.Defaults = actualProperties.Defaults;
+                this.Constraints = actualProperties.Constraints;
+                this.DataTokens = actualProperties.DataTokens;
+                this.RouteHandler = actualProperties.RouteHandler;
+            }
         }
     }
 }

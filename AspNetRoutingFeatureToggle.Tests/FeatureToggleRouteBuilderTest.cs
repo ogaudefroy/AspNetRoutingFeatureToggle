@@ -38,7 +38,7 @@
             Assert.That(route, Is.InstanceOf<FeatureToggleRoute>());
 
             var ftRoute = (FeatureToggleRoute)route;
-            Assert.That(ftRoute.RouteHandler, Is.InstanceOf<FeatureToggleRouteHandler>());
+            Assert.That(ftRoute.RouteHandler, Is.Null);
 
             Assert.That(ftRoute.CurrentRouteProperties.Defaults, Is.EqualTo(defaultsCurrent));
             Assert.That(ftRoute.CurrentRouteProperties.Constraints, Is.EqualTo(defaultsConstraints));
@@ -75,7 +75,7 @@
             Assert.That(route, Is.InstanceOf<FeatureToggleRoute>());
 
             var ftRoute = (FeatureToggleRoute)route;
-            Assert.That(ftRoute.RouteHandler, Is.InstanceOf<FeatureToggleRouteHandler>());
+            Assert.That(ftRoute.RouteHandler, Is.Null);
 
             Assert.That(ftRoute.CurrentRouteProperties.Defaults, Is.EqualTo(defaultsCurrent));
             Assert.That(ftRoute.CurrentRouteProperties.Constraints, Is.EqualTo(defaultsConstraints));
@@ -109,7 +109,7 @@
             Assert.That(route, Is.InstanceOf<FeatureToggleRoute>());
 
             var ftRoute = (FeatureToggleRoute)route;
-            Assert.That(ftRoute.RouteHandler, Is.InstanceOf<FeatureToggleRouteHandler>());
+            Assert.That(ftRoute.RouteHandler, Is.Null);
 
             Assert.That(ftRoute.CurrentRouteProperties.Defaults, Is.EqualTo(defaultsCurrent));
             Assert.That(ftRoute.CurrentRouteProperties.Constraints, Is.EqualTo(defaultsConstraints));
@@ -140,7 +140,7 @@
             Assert.That(route, Is.InstanceOf<FeatureToggleRoute>());
 
             var ftRoute = (FeatureToggleRoute)route;
-            Assert.That(ftRoute.RouteHandler, Is.InstanceOf<FeatureToggleRouteHandler>());
+            Assert.That(ftRoute.RouteHandler, Is.Null);
 
             Assert.That(ftRoute.CurrentRouteProperties.Defaults, Is.EqualTo(defaultsCurrent));
             Assert.That(ftRoute.CurrentRouteProperties.Constraints, Is.EqualTo(defaultsConstraints));
