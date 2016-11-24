@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/ogaudefroy/AspNetRoutingFeatureToggle</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A feature toggle library with ASP.Net routing </description>
+    <tags>asp.net, routing, feature toggle</tags>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+  </metadata>
+</package>

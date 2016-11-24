@@ -80,6 +80,7 @@
     <Compile Include="RouteValueDictionaryExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AspNetRoutingFeatureToggle.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
