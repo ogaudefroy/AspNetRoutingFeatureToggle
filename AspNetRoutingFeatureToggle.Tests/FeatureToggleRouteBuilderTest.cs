@@ -1,5 +1,6 @@
 ﻿namespace AspNetRoutingFeatureToggle.Tests
 {
+    using System;
     using System.Web.Mvc;
     using System.Web.Routing;
     using NUnit.Framework;
@@ -7,6 +8,19 @@
     [TestFixture]
     public class FeatureToggleRouteBuilderTest
     {
+        [Test]
+        public void FeatureToggleRouteBuilderTest_WithUrlNullOrEmpty_Throws()
+        {
+            Assert.That(() => FeatureToggleRouteBuilder.WithUrl(null), Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(() => FeatureToggleRouteBuilder.WithUrl(string.Empty), Throws.InstanceOf<ArgumentNullException>());
+        }
+
+        [Test]
+        public void FeatureToggleRouteBuilderTest_WithFeatureToggleNull_Throws()
+        {
+            Assert.That(() => FeatureToggleRouteBuilder.WithUrl("test").WithFeatureToogle(null), Throws.InstanceOf<ArgumentNullException>());
+        }
+
         [Test]
         public void FeatureToggleRouteBuilderTest_WebFormsToWebForms()
         {

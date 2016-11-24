@@ -14,10 +14,6 @@
         /// <param name="url">The target route URL.</param>
         private FeatureToggleRouteBuilder(string url)
         {
-            if (string.IsNullOrEmpty(url))
-            {
-                throw new ArgumentNullException("url");
-            }
             this.Url = url;
             this.Current = new RouteProperties();
             this.Experimental = new RouteProperties();
@@ -66,6 +62,10 @@
         /// <returns>The FT route builder itself.</returns>
         public static FeatureToggleBuilder WithUrl(string url)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                throw new ArgumentNullException("url");
+            }
             return new FeatureToggleBuilder(new FeatureToggleRouteBuilder(url));
         }
 
