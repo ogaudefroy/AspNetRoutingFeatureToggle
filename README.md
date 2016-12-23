@@ -1,5 +1,5 @@
 # AspNetRoutingFeatureToggle
-[![Build status](https://ci.appveyor.com/api/projects/status/gwb3vj9obv6i2te5/branch/master?svg=true)](https://ci.appveyor.com/project/ogaudefroy/aspnetroutingfeaturetoggle/branch/master)  
+[![Build status](https://ci.appveyor.com/api/projects/status/gwb3vj9obv6i2te5/branch/master?svg=true)](https://ci.appveyor.com/project/ogaudefroy/aspnetroutingfeaturetoggle/branch/master)  [![NuGet version](https://badge.fury.io/nu/AspNetRoutingFeatureToggle.svg)](https://badge.fury.io/nu/AspNetRoutingFeatureToggle)  
 AspNetRoutingFeatureToggle is a feature toggle library based on ASP.Net routing attempting to solve A/B testing with constant URLs.
 
 ## Use Case
